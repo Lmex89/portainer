@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    restart: always
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./portainer-data:/data
+    ports:
+      - 9000:9000
+      - 9443:9443
+
+# this is how to convert docker run in docker compose file
+# docker run -d -p 8000:8000 
+#    -p 9443:9443 --name portainer 
+#--restart=always 
+#-v /var/run/docker.sock:/var/run/docker.sock
+# -v portainer_data:/data portainer/
+#portainer-ce:latest
